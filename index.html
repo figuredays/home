@@ -1,76 +1,103 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FigureDays 手办时光</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --main-color: #ff66a6;
+      --bg-gradient: linear-gradient(145deg, #f9f9ff, #fef6ff);
+      --text-color: #333;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-      background: linear-gradient(135deg, #e0eaff, #fef6ff);
-      color: #333;
+      padding: 0;
+      font-family: 'Noto Sans SC', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-color);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px;
       text-align: center;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 0.2em;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    p {
-      font-size: 1.2em;
-      margin-bottom: 2em;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-
-    a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 24px;
-      font-size: 1em;
-      text-decoration: none;
-      color: white;
-      background: #ff66a6;
-      border-radius: 8px;
-      transition: background 0.3s ease;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    a:hover {
-      background: #ff3388;
     }
 
     .lang-switcher {
       position: absolute;
-      top: 15px;
-      right: 20px;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 8px;
     }
 
     .lang-switcher button {
-      margin-left: 5px;
       padding: 6px 12px;
+      font-size: 0.9em;
+      background: #f0f0f0;
       border: none;
       border-radius: 6px;
-      background-color: #eee;
       cursor: pointer;
-      font-size: 0.9em;
+      transition: background 0.3s ease;
     }
 
     .lang-switcher button.active {
-      background-color: #ff66a6;
+      background: var(--main-color);
       color: white;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    h1 {
+      font-size: 2.2em;
+      font-weight: 700;
+      margin-bottom: 0.4em;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 2em;
+      max-width: 90%;
+    }
+
+    a {
+      display: block;
+      margin: 12px 0;
+      padding: 14px 28px;
+      font-size: 1em;
+      background: var(--main-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(255, 102, 166, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      background: #ff3388;
+      transform: scale(1.03);
+    }
+
+    @media (min-width: 600px) {
+      h1 {
+        font-size: 3em;
+      }
+
+      p {
+        font-size: 1.3em;
+      }
+
+      a {
+        width: auto;
+        display: inline-block;
+        margin: 12px 10px;
+      }
     }
   </style>
 </head>
@@ -96,14 +123,14 @@
       },
       en: {
         title: "Welcome to FigureDays",
-        desc: "Share your figure collection life with us.",
-        link1: "Visit our X profile",
+        desc: "Share and explore the life of figure collections.",
+        link1: "Visit our X page",
         link2: "Watch our YouTube channel"
       },
       jp: {
-        title: "ようこそ、FigureDays 手作りフィギュアの時間へ",
-        desc: "あなたのフィギュア生活を共有しましょう。",
-        link1: "Xアカウントを見る",
+        title: "FigureDays 手作りフィギュアの時間へようこそ",
+        desc: "あなたのフィギュア生活を記録し共有しましょう。",
+        link1: "Xページを見る",
         link2: "YouTubeチャンネルを見る"
       }
     };
@@ -114,7 +141,7 @@
       document.getElementById('link1').textContent = langContent[lang].link1;
       document.getElementById('link2').textContent = langContent[lang].link2;
 
-      // 激活按钮状态
+      // 切换按钮状态
       document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
       document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
     }

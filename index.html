@@ -1,17 +1,123 @@
-<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FigureDays</title>
+  <meta charset="UTF-8">
+  <title>FigureDays 手办时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      background: linear-gradient(135deg, #e0eaff, #fef6ff);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 2em;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 1em;
+      text-decoration: none;
+      color: white;
+      background: #ff66a6;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    a:hover {
+      background: #ff3388;
+    }
+
+    .lang-switcher {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .lang-switcher button {
+      margin-left: 5px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #eee;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+
+    .lang-switcher button.active {
+      background-color: #ff66a6;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to FigureDays</h1>
-  <p>分享手办摄影、开箱与收藏</p>
-  <ul>
-    <li><a href="/x">跳转到 X</a></li>
-    <li><a href="/video">跳转到 YouTube</a></li>
-  </ul>
+  <div class="lang-switcher">
+    <button onclick="setLang('zh')" class="active">中文</button>
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('jp')">日本語</button>
+  </div>
+
+  <h1 id="title">欢迎来到 FigureDays 手办时光</h1>
+  <p id="desc">记录与分享你的手办收藏生活</p>
+  <a id="link1" href="/x" target="_blank">访问我们的 X 页面</a>
+  <a id="link2" href="/video" target="_blank">观看我们的 YouTube 频道</a>
+
+  <script>
+    const langContent = {
+      zh: {
+        title: "欢迎来到 FigureDays 手办时光",
+        desc: "记录与分享你的手办收藏生活",
+        link1: "访问我们的 X 页面",
+        link2: "观看我们的 YouTube 频道"
+      },
+      en: {
+        title: "Welcome to FigureDays",
+        desc: "Share your figure collection life with us.",
+        link1: "Visit our X profile",
+        link2: "Watch our YouTube channel"
+      },
+      jp: {
+        title: "ようこそ、FigureDays 手作りフィギュアの時間へ",
+        desc: "あなたのフィギュア生活を共有しましょう。",
+        link1: "Xアカウントを見る",
+        link2: "YouTubeチャンネルを見る"
+      }
+    };
+
+    function setLang(lang) {
+      document.getElementById('title').textContent = langContent[lang].title;
+      document.getElementById('desc').textContent = langContent[lang].desc;
+      document.getElementById('link1').textContent = langContent[lang].link1;
+      document.getElementById('link2').textContent = langContent[lang].link2;
+
+      // 激活按钮状态
+      document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
+    }
+  </script>
 </body>
 </html>

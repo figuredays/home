@@ -108,7 +108,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-5761KWWG5R');
   </script>
 </head>
@@ -156,14 +155,31 @@
       document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
     }
 
-    // 默认语言：中文
+    // 默认语言设定
     setLang('zh');
-
-    // 自动检测浏览器语言
     const browserLang = navigator.language.slice(0, 2);
     if (browserLang === 'en') setLang('en');
     else if (browserLang === 'ja') setLang('jp');
     else setLang('zh');
+
+    // Google Analytics 点击事件追踪
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("link1").addEventListener("click", function () {
+        gtag('event', 'click', {
+          'event_category': 'link',
+          'event_label': 'X page button',
+          'value': 1
+        });
+      });
+
+      document.getElementById("link2").addEventListener("click", function () {
+        gtag('event', 'click', {
+          'event_category': 'link',
+          'event_label': 'YouTube channel button',
+          'value': 1
+        });
+      });
+    });
   </script>
 </body>
 </html>

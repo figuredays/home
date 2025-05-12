@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FigureDays</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --main-color: #ff66a6;
@@ -100,6 +101,16 @@
       }
     }
   </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5761KWWG5R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5761KWWG5R');
+  </script>
 </head>
 <body>
   <div class="lang-switcher">
@@ -148,7 +159,7 @@
     // 默认语言：中文
     setLang('zh');
 
-    // ✅ 可选：自动检测浏览器语言（如需启用请取消注释）
+    // 自动检测浏览器语言
     const browserLang = navigator.language.slice(0, 2);
     if (browserLang === 'en') setLang('en');
     else if (browserLang === 'ja') setLang('jp');

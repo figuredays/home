@@ -102,7 +102,7 @@
     }
   </style>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics gtag.js -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5761KWWG5R"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -120,8 +120,8 @@
 
   <h1 id="title"></h1>
   <p id="desc"></p>
-  <a id="link1" href="/x" target="_blank"></a>
-  <a id="link2" href="/video" target="_blank"></a>
+  <a id="link1" href="/x" target="_blank">X</a>
+  <a id="link2" href="/video" target="_blank">YouTube</a>
 
   <script>
     const langContent = {
@@ -145,45 +145,47 @@
       }
     };
 
+    let currentLang = 'zh';
+
     function setLang(lang) {
+      currentLang = lang;
       document.getElementById('title').textContent = langContent[lang].title;
       document.getElementById('desc').textContent = langContent[lang].desc;
       document.getElementById('link1').textContent = langContent[lang].link1;
       document.getElementById('link2').textContent = langContent[lang].link2;
 
       document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
+      document.querySelector(`#btn-${lang}`).classList.add('active');
 
-      // Google Analytics 语言切换事件统计
-      gtag('event', 'language_switch', {
+      // GA4 语言切换事件
+      gtag('event', 'language_selected', {
         'event_category': 'language',
-        'event_label': lang,
-        'value': 1
+        'event_label': lang
       });
     }
 
-    // 默认语言设定
+    // 设置默认语言
     setLang('zh');
     const browserLang = navigator.language.slice(0, 2);
     if (browserLang === 'en') setLang('en');
     else if (browserLang === 'ja') setLang('jp');
     else setLang('zh');
 
-    // Google Analytics 点击事件追踪
+    // 平台点击事件追踪（含语言信息）
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("link1").addEventListener("click", function () {
-        gtag('event', 'click', {
-          'event_category': 'link',
-          'event_label': 'X page button',
-          'value': 1
+        gtag('event', 'platform_click', {
+          'event_category': 'platform',
+          'event_label': 'x_page',
+          'language': currentLang
         });
       });
 
       document.getElementById("link2").addEventListener("click", function () {
-        gtag('event', 'click', {
-          'event_category': 'link',
-          'event_label': 'YouTube channel button',
-          'value': 1
+        gtag('event', 'platform_click', {
+          'event_category': 'platform',
+          'event_label': 'youtube_channel',
+          'language': currentLang
         });
       });
     });

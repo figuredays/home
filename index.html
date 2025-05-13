@@ -113,9 +113,9 @@
 </head>
 <body>
   <div class="lang-switcher">
-    <button onclick="setLang('zh')" class="active">中文</button>
-    <button onclick="setLang('en')">English</button>
-    <button onclick="setLang('jp')">日本語</button>
+    <button id="btn-zh" onclick="setLang('zh')" class="active">中文</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+    <button id="btn-jp" onclick="setLang('jp')">日本語</button>
   </div>
 
   <h1 id="title"></h1>
@@ -153,6 +153,13 @@
 
       document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
       document.querySelector(`.lang-switcher button[onclick="setLang('${lang}')"]`).classList.add('active');
+
+      // Google Analytics 语言切换事件统计
+      gtag('event', 'language_switch', {
+        'event_category': 'language',
+        'event_label': lang,
+        'value': 1
+      });
     }
 
     // 默认语言设定
